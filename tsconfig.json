@@ -2,7 +2,7 @@
     "compilerOptions": {
         "charset": "UTF-8",
         "newLine": "lf",
-        "target": "ES6",
+        "target": "ES2018",
         "module": "CommonJS",
         "outDir": "lib",
         "esModuleInterop": true,
