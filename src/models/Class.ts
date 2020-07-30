@@ -1,4 +1,4 @@
-import { ODataModel, BaseODataModel, ODataColumn, ODataNavigation } from "@odata/server";
+import { BaseODataModel, ODataColumn, ODataModel, ODataNavigation } from "@odata/server";
 import { Teacher } from "./Teacher";
 
 @ODataModel()
@@ -14,7 +14,7 @@ export class Class extends BaseODataModel {
     desc: string
 
     @ODataNavigation({ type: 'ManyToOne', entity: () => Teacher, foreignKey: "teacherOneId" })
-    teacher: any
+    teacher: Teacher
 
     @ODataColumn()
     teacherOneId: number;
