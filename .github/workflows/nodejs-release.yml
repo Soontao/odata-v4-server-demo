@@ -1,0 +1,30 @@
+name: Package Release
+
+on: 
+    push:
+        tags:
+            - '*'
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Use Node.js 10.x
+      uses: actions/setup-node@v1
+      with:
+        node-version: 10.x
+        registry-url: https://registry.npmjs.org/
+    
+    - name: npm test
+      run: |
+        npm install
+        npm test
+      env:
+        CI: true
+    
+    - name: npm auth & publish
+      run: npm run ts:build && npm publish --access public --tag latest
+      env:
+        NODE_AUTH_TOKEN: ${{secrets.Z_NPM_TOKEN}}
