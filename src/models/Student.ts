@@ -1,20 +1,20 @@
-import { ODataModel, BaseODataModel, ODataColumn } from "@odata/server";
+import { BaseODataModel, ODataColumn, ODataModel, ODataNavigation } from '@odata/server';
+import { RelStudentClassAssignment } from './Rel';
 
 @ODataModel()
 export class Student extends BaseODataModel {
 
-    // generated id
-    @ODataColumn({ primary: true, generated: "increment" })
-    id: number;
+  // generated id
+  @ODataColumn({ primary: true, generated: 'increment' })
+  id: number;
 
-    @ODataColumn()
-    name: string;
+  @ODataColumn()
+  name: string;
 
-    @ODataColumn()
-    age: number;
+  @ODataColumn({ nullable: true })
+  age: number;
+
+  @ODataNavigation({ type: 'OneToMany', entity: () => RelStudentClassAssignment, foreignKey: 'studentId' })
+  classes: any;
 
 }
-
-
-
-
