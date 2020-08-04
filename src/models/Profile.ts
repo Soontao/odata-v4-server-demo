@@ -6,4 +6,7 @@ export class Profile extends BaseODataModel {
   @ODataColumn({ primary: true, generated: 'increment' })
   id: number;
 
+  @ODataColumn()
+  title: string;
+
 }

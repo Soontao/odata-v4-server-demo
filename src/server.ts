@@ -1,11 +1,9 @@
 import { createTypedODataServer } from '@odata/server';
 import 'reflect-metadata';
-import { Class, Profile, RelStudentClassAssignment, Student, Teacher } from './models';
+import { SchoolEntities } from './models';
 
 
 const run = async () => {
-
-    const entities = [Student, Class, Teacher, Profile, RelStudentClassAssignment];
 
     const server = await createTypedODataServer({
         name: 'default',
@@ -13,8 +11,8 @@ const run = async () => {
         synchronize: true,
         logging: true,
         cache: true,
-        entities
-    }, ...entities);
+        entities: SchoolEntities
+    }, ...SchoolEntities);
 
     const s = server.create(parseInt(process.env.PORT) || 50000);
 
