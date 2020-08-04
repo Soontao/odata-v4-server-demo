@@ -7,7 +7,7 @@ class Response {
   @Edm.Decimal
   outNumber: number;
   @Edm.String
-  inString: string;
+  outString: string;
 }
 
 @ODataModel()
@@ -59,7 +59,7 @@ export class Teacher extends BaseODataModel {
   async echo(inNumber: number, inString: string): Promise<any> {
     return {
       outNumber: inNumber,
-      inString: inString
+      outString: inString
     };
   }
 
