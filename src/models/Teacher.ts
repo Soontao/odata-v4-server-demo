@@ -3,6 +3,13 @@ import { isUndefined } from 'util';
 import { Class } from './Class';
 import { Profile } from './Profile';
 
+class Response {
+  @Edm.Decimal
+  outNumber: number;
+  @Edm.String
+  inString: string;
+}
+
 @ODataModel()
 export class Teacher extends BaseODataModel {
 
@@ -46,6 +53,14 @@ export class Teacher extends BaseODataModel {
     // run native SQL query
     const items = await qr.query(`select name from class where teacherOneId = :id`, [this.id]);
     return items.map((item) => item.name);
+  }
+
+  @ODataFunction(Edm.ComplexType(Response))
+  async echo(inNumber: number, inString: string): Promise<any> {
+    return {
+      outNumber: inNumber,
+      inString: inString
+    };
   }
 
 }
