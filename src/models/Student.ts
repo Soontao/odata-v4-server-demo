@@ -14,7 +14,7 @@ export class Student extends BaseODataModel {
   @ODataColumn({ nullable: true })
   age: number;
 
-  @ODataNavigation({ type: 'OneToMany', entity: () => RelStudentClassAssignment, foreignKey: 'studentId' })
+  @ODataNavigation({ type: 'OneToMany', entity: () => RelStudentClassAssignment, targetForeignKey: 'studentId' })
   classes: any;
 
 }

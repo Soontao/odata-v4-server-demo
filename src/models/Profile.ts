@@ -1,4 +1,5 @@
-import { BaseODataModel, ODataColumn, ODataModel } from '@odata/server';
+import { BaseODataModel, ODataColumn, ODataModel, ODataNavigation } from '@odata/server';
+import { Teacher } from '.';
 
 @ODataModel()
 export class Profile extends BaseODataModel {
@@ -8,5 +9,8 @@ export class Profile extends BaseODataModel {
 
   @ODataColumn()
   title: string;
+
+  @ODataNavigation({ type: 'OneToOne', entity: () => Teacher, targetForeignKey: 'profileId' })
+  teacher: Teacher;
 
 }

@@ -25,7 +25,7 @@ export class Teacher extends BaseODataModel {
   @ODataNavigation({ type: 'OneToOne', entity: () => Profile, foreignKey: 'profileId' })
   profile: Profile;
 
-  @ODataNavigation({ type: 'OneToMany', entity: () => Class, foreignKey: 'teacherOneId' })
+  @ODataNavigation({ type: 'OneToMany', entity: () => Class, targetForeignKey: 'teacherOneId' })
   classes: Class[];
 
   // POST http://localhost:50000/Teachers(1)/Default.addClass

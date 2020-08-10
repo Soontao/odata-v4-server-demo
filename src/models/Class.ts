@@ -1,9 +1,9 @@
-import { BaseODataModel, ODataColumn, ODataEntitySetName, ODataModel, ODataNavigation } from '@odata/server';
+import { BaseODataModel, ODataColumn, ODataModel, ODataNavigation, withEntitySetName } from '@odata/server';
 import { RelStudentClassAssignment } from './Rel';
 import { Teacher } from './Teacher';
 
 // indicate the entity set name for entity
-@ODataEntitySetName('Classes')
+@withEntitySetName('Classes')
 @ODataModel()
 export class Class extends BaseODataModel {
 
@@ -23,7 +23,7 @@ export class Class extends BaseODataModel {
   teacher: any;
 
   // GET http://localhost:50000/Classes?$expand=students($expand=student)
-  @ODataNavigation({ type: 'OneToMany', entity: () => RelStudentClassAssignment, foreignKey: 'classId' })
+  @ODataNavigation({ type: 'OneToMany', entity: () => RelStudentClassAssignment, targetForeignKey: 'classId' })
   students: any;
 
 }
