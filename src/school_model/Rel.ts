@@ -1,17 +1,17 @@
-import { BaseODataModel, ODataColumn, ODataModel, ODataNavigation } from '@odata/server';
+import { IncKeyProperty, ODataModel, ODataNavigation, Property } from '@odata/server';
 import { Class } from './Class';
 import { Student } from './Student';
 
 @ODataModel()
-export class RelStudentClassAssignment extends BaseODataModel {
+export class RelStudentClassAssignment {
 
-  @ODataColumn({ primary: true, generated: 'uuid' })
-  uuid: string;
+  @IncKeyProperty()
+  uuid: number;
 
-  @ODataColumn()
+  @Property()
   studentId: number;
 
-  @ODataColumn()
+  @Property()
   classId: number;
 
   @ODataNavigation({ entity: () => Student, foreignKey: 'studentId', type: 'ManyToOne' })
