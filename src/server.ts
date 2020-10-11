@@ -1,5 +1,6 @@
 import { createTypedODataServer } from '@odata/server';
 import 'reflect-metadata';
+import { ProposalEntities } from './proposal';
 import { SchoolEntities } from './school_model';
 
 
@@ -11,7 +12,7 @@ const run = async () => {
         synchronize: true,
         logging: true,
         cache: true,
-        entities: SchoolEntities
+        entities: [...SchoolEntities, ...ProposalEntities]
     });
 
     const s = server.create(parseInt(process.env.PORT) || 50000);

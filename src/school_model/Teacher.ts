@@ -38,20 +38,21 @@ export class Teacher {
   async addClass(
     @Edm.ParameterType(Edm.Int32) classId: number,
     @oInject.service(lazyRef(() => Class)) classService: InjectedTypedService<Class>
-  ) {
+  ): Promise<void> {
     const c = await classService.findOne(classId);
 
     if (c === undefined) {
       throw new ResourceNotFoundError(`not found instance class[${classId}]`);
     }
 
-    await classService.update(c.cid, { teacherOneId: this.tid }); // save with hooks lifecycle, suggested
+    // save with hooks lifecycle, recommend
+    await classService.update(c.cid, { teacherOneId: this.tid });
   }
 
   // GET http://localhost:50000/Teachers(1)/Default.queryClass()
   @ODataFunction
   @Edm.ReturnType(Edm.Collection(Edm.String))
-  async queryClass(@oInject.txConnection conn: Connection) {
+  async queryClass(@oInject.txConnection conn: Connection): Promise<Array<string>> {
     const classes = await conn.getRepository(Class).find({
       where: {
         teacherOneId: this.tid
