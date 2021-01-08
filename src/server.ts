@@ -1,10 +1,12 @@
 import { createTypedODataServer } from '@odata/server';
+import express from "express";
 import 'reflect-metadata';
 import { ProposalEntities } from './proposal';
 import { SchoolEntities } from './school_model';
 
-
 const run = async () => {
+
+    const port = parseInt(process.env.PORT || '50000', 10);
 
     const server = await createTypedODataServer({
         name: 'default',
@@ -15,12 +17,15 @@ const run = async () => {
         entities: [...SchoolEntities, ...ProposalEntities]
     });
 
-    const s = server.create(parseInt(process.env.PORT) || 50000);
+    const app = express();
 
-    s.once(
-        'listening',
-        () => console.log(`server started at ${s.address()['address']}:${s.address()['port']}`)
-    );
+    app.set('trust proxy', true);
+
+    app.use(server.create());
+
+    app.listen(port, () => {
+        console.log(`server started at ${port}`);
+    });
 
 };
 

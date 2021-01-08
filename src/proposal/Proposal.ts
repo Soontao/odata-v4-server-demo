@@ -1,5 +1,5 @@
 import {
-    BaseODataModel, ODataModel,
+    BaseODataModel, BigNumber, ODataModel,
     ODataNavigation, OptionalProperty, UUIDKeyProperty, withEntitySetName
 } from '@odata/server';
 import { Provider } from './Provider';
@@ -15,14 +15,14 @@ export class Proposal extends BaseODataModel {
     @OptionalProperty({ charset: "Utf8", length: 72 })
     name: string;
 
-    @OptionalProperty({ enum: ["high", "medium-high", "medium", "medium-low", "low"] })
+    @OptionalProperty({ enumValues: ["high", "medium-high", "medium", "medium-low", "low"] })
     voltage_level: string;
 
-    @OptionalProperty({ enum: ["blank", "profiles", "controlled", "time-series"] })
+    @OptionalProperty({ enumValues: ["blank", "profiles", "controlled", "time-series"] })
     consumer_profile: string;
 
     @OptionalProperty({ type: "decimal", precision: 12, scale: 2 })
-    energy_fee: string;
+    energy_fee: BigNumber;
 
     @OptionalProperty({ type: "boolean", default: false })
     funds: boolean;
